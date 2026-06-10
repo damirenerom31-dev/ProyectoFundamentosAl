@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>minimarket damir - mi carrito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=inter:wght@300;400;500;600;700&family=poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="barra-navegacion">
+    <div class="bloque-marca">
+        <a href="{{ url_for('index') }}" class="enlace-home">
+            <i class="fa-solid fa-store icono-tienda-logo"></i>
+            <h1 class="logo-texto-principal">minimarket <span>damir</span></h1>
+        </a>
+    </div>
+    <nav class="menu-navegacion-derecha">
+        <ul class="lista-enlaces-navegacion">
+            <li><a href="{{ url_for('index') }}" class="enlace-menu"><i class="fa-solid fa-house"></i> inicio</a></li>
+            <li>
+                <a href="{{ url_for('carrito') }}" class="enlace-menu posicion-relativa">
+                    <i class="fa-solid fa-cart-shopping icono-carrito-navegacion"></i> carrito
+                    <span id="contador-items-carrito-badge" class="badge-cantidad-carrito">0</span>
+                </a>
+            </li>
+            <li>
+                <div class="bloque-usuario-menu">
+                    {% if usuario %}
+                        <a href="{{ url_for('perfil') }}" class="btn-ingresar-login">
+                            <i class="fa-solid fa-user"></i> hola, {{ usuario.nombre }}
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('login') }}" class="btn-ingresar-login">
+                            <i class="fa-solid fa-user-plus"></i> ingresar / registrarse
+                        </a>
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main class="contenedor-tienda contenedor-carrito-layout">
+    <h2 class="titulo-seccion-general"><i class="fa-solid fa-basket-shopping"></i> tu cesta de compras</h2>
+    
+    <div class="bloque-carrito-vacio" id="carrito-vacio-mensaje" style="display: none;">
+        <i class="fa-solid fa-bag-shopping icono-bolsa-vacia"></i>
+        <p>tu carrito está vacío actualmente.</p>
+        <a href="{{ url_for('index') }}" class="btn-formulario-primario" style="display: inline-block; width: auto; margin-top: 15px; padding: 10px 25px; text-decoration: none;">volver a las categorías</a>
+    </div>
+
+    <div class="bloque-flexible-carrito" id="bloque-carrito-lleno-layout" style="display: none;">
+        
+        <div id="lista-productos-carrito" class="lista-productos-contenedor">
+            </div>
+
+        <div class="tarjeta-resumen-pedido">
+            <h3>resumen del pedido</h3>
+            <div class="linea-resumen">
+                <span>subtotal:</span>
+                <strong id="resumen-subtotal">s/ 0.00</strong>
+            </div>
+            <div class="linea-resumen">
+                <span>envío:</span>
+                <strong class="texto-gratis">gratis</strong>
+            </div>
+            <div class="divisor-resumen"></div>
+            <div class="linea-resumen total">
+                <span>total a pagar:</span>
+                <strong id="resumen-total">s/ 0.00</strong>
+            </div>
+            
+            <button class="btn-confirmar-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> realizar pedido por whatsapp
+            </button>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2026 minimarket damir. todos los derechos reservados.</p>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

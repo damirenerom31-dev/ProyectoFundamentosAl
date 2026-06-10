@@ -1,0 +1,779 @@
+/* ==========================================================================
+   1. estilos generales y reset
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333333;
+    /* flexbox global para obligar al footer a quedarse abajo */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* el contenedor principal se expande para empujar el footer al fondo */
+main, .contenedor-tienda {
+    flex: 1;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* ==========================================================================
+   2. barra de navegación (diseño original + sistema de usuario)
+   ========================================================================== */
+.barra-navegacion {
+    background-color: #ff6600;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.bloque-marca .enlace-home {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    gap: 10px;
+}
+
+.icono-tienda-logo {
+    font-size: 1.8rem;
+}
+
+.logo-texto-principal {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.logo-texto-principal span {
+    color: #333333;
+}
+
+/* buscador central original recuperado */
+.bloque-buscador-central {
+    flex: 0 1 500px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-barra-busqueda {
+    width: 100%;
+    padding: 12px 45px 12px 20px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #333333;
+}
+
+.icono-lupa-busqueda {
+    position: absolute;
+    right: 20px;
+    color: #888888;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+/* menú de navegación derecho */
+.lista-enlaces-navegacion {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.enlace-menu {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+/* dale un margen derecho al enlace del carrito para darle espacio al badge y que no se encima */
+.enlace-menu.posicion-relativa {
+    position: relative;
+    margin-right: 15px; 
+}
+
+/* ajusta la posición exacta del badge flotante del carrito */
+.badge-cantidad-carrito {
+    background-color: #333333;
+    color: #ffffff;
+    padding: 3px 7px;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    position: absolute;
+    top: -6px;       
+    right: -15px;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); 
+}
+
+/* botón de usuario / login estilizado */
+.btn-ingresar-login {
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-ingresar-login:hover {
+    background-color: #222222;
+}
+
+/* menú desplegable dinámico */
+.bloque-usuario-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-desplegable-usuario {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #ffffff;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 1001;
+    margin-top: 8px;
+}
+
+.bloque-usuario-menu:hover .menu-desplegable-usuario {
+    display: block;
+}
+
+.menu-desplegable-usuario a {
+    color: #333333;
+    padding: 12px 16px;
+    display: block;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.menu-desplegable-usuario a:hover {
+    background-color: #f1f1f1;
+}
+
+/* ==========================================================================
+   3. contenedor principal y estructura (CORREGIDO)
+   ========================================================================== */
+.contenedor-tienda {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.flex-column-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%; /* Asegura que el layout use todo el ancho disponible */
+}
+
+/* banner promocional de inicio */
+.banner-promocional-principal {
+    background: linear-gradient(135deg, #ff6600 0%, #ff9933 100%);
+    border-radius: 16px;
+    padding: 50px 40px;
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(255, 102, 0, 0.15);
+    width: 100%;
+}
+
+.contenido-banner-texto h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 12px;
+}
+
+.contenido-banner-texto p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    max-width: 600px;
+    line-height: 1.5;
+}
+
+.btn-explorar-tienda {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #333333;
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-explorar-tienda:hover {
+    background-color: #222222;
+}
+
+/* ==========================================================================
+   4. secciones de pasillos (CORREGIDO)
+   ========================================================================== */
+.seccion-categorias-tienda {
+    width: 100%;
+}
+
+.titulo-seccion-general, 
+.titulo-pasillo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    color: #333333;
+    margin-bottom: 25px;
+    border-left: 5px solid #ff6600;
+    padding-left: 12px;
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+}
+
+.subtitulo-pasillo {
+    color: #666666;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+/* grilla y tarjetas de pasillos corregidas */
+.grilla-categorias-accesos {
+    display: grid;
+    /* Ajustado a un mínimo óptimo de 220px para expandirse horizontalmente */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    width: 100%;
+}
+
+.tarjeta-categoria-enlace {
+    background: #ffffff;
+    border: 1px solid #e3e3e3;
+    border-radius: 12px;
+    padding: 25px 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.tarjeta-categoria-enlace:hover {
+    transform: translateY(-5px);
+    border-color: #ff6600;
+    box-shadow: 0 6px 12px rgba(255,102,0,0.1);
+}
+
+.categoria-icono-circulo {
+    width: 60px;
+    height: 60px;
+    background-color: #fff0e6;
+    color: #ff6600;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.tarjeta-categoria-enlace:hover .categoria-icono-circulo {
+    transform: scale(1.1);
+}
+
+.tarjeta-categoria-enlace h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.tarjeta-categoria-enlace p {
+    font-size: 0.88rem;
+    color: #666666;
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   5. visualización de productos en los pasillos
+   ========================================================================== */
+.grilla-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.tarjeta-producto {
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s;
+    border: 1px solid #eeeeee;
+}
+
+.tarjeta-producto:hover {
+    transform: translateY(-5px);
+}
+
+.producto-imagen {
+    height: 200px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fafafa;
+}
+
+.producto-imagen img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.producto-detalles {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.marca {
+    color: #888888;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.nombre {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333333;
+    height: 42px;
+    overflow: hidden;
+}
+
+.bloque-precio-accion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.precio-actual {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ff6600;
+}
+
+.btn-agregar {
+    background-color: #ff6600;
+    color: #ffffff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background 0.3s;
+}
+
+.btn-agregar:hover {
+    background-color: #e05500;
+}
+
+/* ==========================================================================
+   6. formularios de autenticación y vista de perfil
+   ========================================================================== */
+.contenedor-autenticacion {
+    max-width: 450px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.contenedor-autenticacion h2 {
+    margin-bottom: 20px;
+    color: #333333;
+    font-size: 1.6rem;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.grupo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.grupo-formulario label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555555;
+}
+
+.input-formulario {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-formulario:focus {
+    border-color: #ff6600;
+}
+
+.btn-formulario-primario {
+    width: 100%;
+    background-color: #ff6600;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.btn-formulario-primario:hover {
+    background-color: #e05500;
+}
+
+.enlace-cambio-auth {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #666666;
+}
+
+.enlace-cambio-auth a {
+    color: #ff6600;
+    font-weight: 600;
+}
+
+/* alertas de error (correo duplicado, etc) */
+.alerta-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    border-left: 4px solid #dc3545;
+}
+
+/* ==========================================================================
+  /* ==========================================================================
+/* ==========================================================================
+   7. diseño avanzado del apartado del carrito de compras (CORREGIDO)
+   ========================================================================== */
+.contenedor-carrito-layout {
+    width: 100%;
+}
+
+/* Caja de dos columnas fijadas */
+.bloque-flexible-carrito {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 30px;
+    width: 100%;
+    margin-top: 25px;
+}
+
+#lista-productos-carrito {
+    flex: 1; /* Toma todo el espacio izquierdo disponible */
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta-resumen-pedido {
+    width: 380px; /* Ancho fijo para la sección derecha del total */
+    background-color: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+}
+
+.bloque-carrito-vacio {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 12px;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.icono-bolsa-vacia {
+    font-size: 3.5rem;
+    color: #cccccc;
+    margin-bottom: 15px;
+}
+
+.tarjeta-resumen-pedido h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    color: #333333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f4f4f4;
+    padding-bottom: 10px;
+}
+
+.linea-resumen {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+    color: #555555;
+}
+
+.texto-gratis {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.divisor-resumen {
+    height: 1px;
+    background-color: #eeeeee;
+    margin: 15px 0;
+}
+
+.linea-resumen.total {
+    font-size: 1.25rem;
+    color: #333333;
+    font-weight: 700;
+}
+
+.linea-resumen.total strong {
+    color: #ff6600;
+}
+
+.btn-confirmar-whatsapp {
+    width: 100%;
+    background-color: #25d366;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2);
+}
+
+/* Vista móvil adaptable */
+@media (max-width: 768px) {
+    .bloque-flexible-carrito {
+        flex-direction: column;
+    }
+    .tarjeta-resumen-pedido {
+        width: 100%;
+    }
+}
+
+/* ==========================================================================
+   8. footer
+   ========================================================================== */
+footer {
+    background-color: #333333;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto; 
+}
+
+/* ==========================================================================
+   9. corrección global de capitalización
+   ========================================================================== */
+.titulo-seccion-general,
+.titulo-pasillo,
+.subtitulo-pasillo,
+.tarjeta-producto,
+.tarjeta-producto h3,
+.tarjeta-producto p,
+.tarjeta-producto span,
+.tarjeta-producto .nombre,
+.tarjeta-producto .marca,
+.enlace-menu,
+.logo-texto-principal,
+.btn-ingresar-login,
+.menu-desplegable-usuario a,
+.contenedor-autenticacion h2,
+.grupo-formulario label,
+.enlace-cambio-auth,
+.tarjeta-categoria-enlace h3,
+.contenido-banner-texto h2,
+.btn-explorar-tienda,
+.tarjeta-resumen-pedido h3,
+.linea-resumen span,
+.btn-confirmar-whatsapp,
+.bloque-carrito-vacio p,
+.btn-volver-tienda {
+    text-transform: capitalize !important;
+}
+/* ==========================================================================
+   10. Estilos para las filas de productos dentro del carrito
+   ========================================================================== */
+.lista-productos-contenedor {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tarjeta-producto-carrito {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    border: 1px solid #eeeeee;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    width: 100%;
+}
+
+.carrito-producto-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.carrito-producto-info img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    background-color: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #f0f0f0;
+    padding: 5px;
+}
+
+.carrito-producto-detalles h4 {
+    font-size: 1rem;
+    color: #333333;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.carrito-producto-detalles span {
+    color: #ff6600;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.carrito-controles {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.carrito-selector-cantidad {
+    display: flex;
+    align-items: center;
+    border: 1px solid #cccccc;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #ffffff;
+    height: 35px;
+}
+
+.carrito-selector-cantidad button {
+    border: none;
+    background: none;
+    padding: 0 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #555555;
+    height: 100%;
+    transition: background 0.2s;
+}
+
+.carrito-selector-cantidad button:hover {
+    background-color: #f1f1f1;
+}
+
+.carrito-selector-cantidad span {
+    font-weight: 600;
+    min-width: 25px;
+    text-align: center;
+    color: #333333;
+    font-size: 1rem;
+}
+
+.btn-eliminar-carrito {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 1.3rem;
+    padding: 5px;
+    transition: color 0.2s;
+}
+
+.btn-eliminar-carrito:hover {
+    color: #bd2130;
+}
